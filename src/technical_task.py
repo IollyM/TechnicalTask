@@ -1,40 +1,75 @@
 import sys
 import os
-import string
 import pandas as pd
+import hashlib
+from exceptions.custom import WrongPathError, \
+    IncorrectArqQuantityError, UsedWrongHashError
 
 
-def general():
-    input_file_path = sys.argv[1]
-    files_directory_path = sys.argv[2]
-    if os.path.isfile(input_file_path):
-        try:
-            read_file(input_file_path, files_directory_path)
-        except:
-            print("Failed to read file")
+def read_file(input_file_path):
+    try:
+        file_reader = pd.read_csv(
+            input_file_path,
+            delim_whitespace='True',
+            header=None)
+        return file_reader
+    except UnicodeDecodeError:
+        print("Change file to utf-8")
+        sys.exit()
+    except pd.errors.ParserError:
+        print("Not csv format")
+        sys.exit()
 
-    else:
-        print('The path to the source file was entered incorrectly. '
-              'The file was not found.')
 
-
-def read_file(input_file_path, files_directory_path):
-    file_reader = pd.read_csv(input_file_path, delim_whitespace='True', header=None)
-    if file_reader.shape[1] != 3:
-        print("Input file structure is incorrect")
-    else:
-        if os.path.isdir(files_directory_path):
-            print(file_reader)
-        # файл и сравнение хэшей
+def encode_file(files_directory_path, filename, hash_type, hash):
+    with open(os.path.join(files_directory_path, filename), "rb") as f:
+        bytes = f.read()
+        if hash_type == "md5":
+            check_hash(hashlib.md5(bytes).hexdigest(), filename, hash)
+        elif hash_type == "sha256":
+            check_hash(hashlib.sha256(bytes).hexdigest(), filename, hash)
+        elif hash_type == "sha1":
+            check_hash(hashlib.sha1(bytes).hexdigest(), filename, hash)
         else:
-            print("The path to the  directory with files was entered incorrectly. "
-                  "The directory was not found.")
+            raise UsedWrongHashError(hash_type)
+
+
+def check_hash(readable_hash, filename, hash):
+    if readable_hash == hash:
+        print(f'{filename} OK')
+    else:
+        print(f'{filename} FAIL')
+
+
+def general(input_file_path, files_directory_path):
+    if os.path.isfile(input_file_path):
+        file_reader = read_file(input_file_path)
+        if file_reader is None or file_reader.shape[1] != 3:
+            raise TypeError("Input file structure is incorrect")
+        else:
+            if os.path.isdir(files_directory_path):
+                for index, row in file_reader.iterrows():
+                    if os.path.isfile(
+                            os.path.join(files_directory_path, row[0])):
+                        encode_file(
+                            files_directory_path,
+                            row[0],
+                            row[1].lower(),
+                            row[2]
+                        )
+                    else:
+                        print(f'{row[0]} NOT FOUND')
+            else:
+                raise WrongPathError(
+                    'to the  directory with files',
+                    'directory'
+                )
+    else:
+        raise WrongPathError('to the input file', 'file')
 
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
-        print(f'Incorrect number of arguments entered. {len(sys.argv)} arguments were introduced, when 3 is needed. '
-              f'(<your program> <path to the input file> <path to the directory containing the files to check>) ')
-        sys.exit()
+        raise IncorrectArqQuantityError(len(sys.argv))
     else:
-        general()
+        general(sys.argv[1], sys.argv[2])
