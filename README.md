@@ -24,7 +24,7 @@ file_04.txt OK
 ## Установка
 
 Для того чтобы установить программу необходимо, наличие на компьютере Python 3, системы управлением пакетами pip.
-После этого необходимо установить зависимости, запустив из директории проекта следующий код.
+После этого необходимо установить зависимости, запустив из директории проекта следующую команду.
 
     pip install -e .
 
@@ -36,9 +36,11 @@ file_04.txt OK
 +<path to the directory containing the files to check> - путь до директории с файлами.
 
 Пример запуска на Windows OS.
+
     python technical_task.py C:\path\to\input\file C:\path\to\files\directory
 
 Пример запуска на Linux
+    
     python technical_task.py /path/to/input/file /path/to/files/directory
 
 ## Дополнительная информация
