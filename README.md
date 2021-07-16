@@ -35,11 +35,11 @@ file_04.txt OK
 + path to the input file - путь до файла с входными данными;
 + path to the directory containing the files to check - путь до директории с файлами.
 
-Пример запуска на Windows OS.
+Пример запуска на Windows OS.(python3 ecли у вас интерпретатором по умолчанию  является python версии 2)
 
     python technical_task.py C:\path\to\input\file C:\path\to\files\directory
 
-Пример запуска на Linux
+Пример запуска на Linux.(python3 ecли у вас интерпретатором по умолчанию  является python версии 2)
     
     python technical_task.py /path/to/input/file /path/to/files/directory
 
