@@ -6,6 +6,9 @@ from exceptions.custom import WrongPathError, \
     IncorrectArqQuantityError, UsedWrongHashError
 
 
+# Read file, check that it is possible to read the file
+
+
 def read_file(input_file_path):
     try:
         file_reader = pd.read_csv(
@@ -21,6 +24,12 @@ def read_file(input_file_path):
         sys.exit()
 
 
+'''
+Select the hash type, check that we can process it,
+get the file hash and send it to the function for comparison.
+'''
+
+
 def encode_file(files_directory_path, filename, hash_type, hash):
     with open(os.path.join(files_directory_path, filename), "rb") as f:
         bytes = f.read()
@@ -34,11 +43,26 @@ def encode_file(files_directory_path, filename, hash_type, hash):
             raise UsedWrongHashError(hash_type)
 
 
+'''
+Compare the hash of the file with the hash from the original file.
+Display result information.
+'''
+
+
 def check_hash(readable_hash, filename, hash):
     if readable_hash == hash:
         print(f'{filename} OK')
     else:
         print(f'{filename} FAIL')
+
+
+'''
+A function that combines all steps into one sequence.
+Checking the correctness of the file structure,
+after checking the existence of a directory with files,
+checking the existence of files from a file with input data.
+Calling the function for calculating the hash of a file.
+'''
 
 
 def general(input_file_path, files_directory_path):
@@ -66,6 +90,11 @@ def general(input_file_path, files_directory_path):
                 )
     else:
         raise WrongPathError('to the input file', 'file')
+
+
+'''
+Check that a valid number of arguments are entered
+'''
 
 
 if __name__ == "__main__":

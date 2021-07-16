@@ -1,3 +1,8 @@
+'''
+Explanatory exceptions that indicate errors were made in use.
+'''
+
+
 class IncorrectArqQuantityError(Exception):
     def __init__(self, quantity):
         message = f'Incorrect number of arguments entered. ' \
