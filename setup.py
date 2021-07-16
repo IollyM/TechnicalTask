@@ -8,5 +8,7 @@ setup(
     author_email='matveeva.anastasiia.a@gmail.com',
     description='TechnicalTask for interview',
     packages=find_packages(),
-    install_requires=['numpy >= 1.21.0', 'pandas==1.3.0'],
+    install_requires=[
+        'numpy >= 1.21.0', 'pandas==1.3.0'
+    ],
 )

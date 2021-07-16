@@ -48,17 +48,17 @@ def general(input_file_path, files_directory_path):
             raise TypeError("Input file structure is incorrect")
         else:
             if os.path.isdir(files_directory_path):
-                for index, row in file_reader.iterrows():
+                for index, file_info in file_reader.iterrows():
                     if os.path.isfile(
-                            os.path.join(files_directory_path, row[0])):
+                            os.path.join(files_directory_path, file_info[0])):
                         encode_file(
                             files_directory_path,
-                            row[0],
-                            row[1].lower(),
-                            row[2]
+                            file_info[0],
+                            file_info[1].lower(),
+                            file_info[2]
                         )
                     else:
-                        print(f'{row[0]} NOT FOUND')
+                        print(f'{file_info[0]} NOT FOUND')
             else:
                 raise WrongPathError(
                     'to the  directory with files',
