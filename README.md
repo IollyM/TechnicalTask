@@ -31,9 +31,9 @@ file_04.txt OK
 ## Запуск
 
 При запуске программы из директории с иходным кодом необходимо указать следующие параметры:
-+<your program> - имя файла;
-+<path to the input file> - путь до файла с входными данными;
-+<path to the directory containing the files to check> - путь до директории с файлами.
++ your program - имя файла программы ;
++ path to the input file - путь до файла с входными данными;
++ path to the directory containing the files to check - путь до директории с файлами.
 
 Пример запуска на Windows OS.
 
@@ -46,10 +46,10 @@ file_04.txt OK
 ## Дополнительная информация
 
 В программе используются следующие оповещения и исключения:
-+"Change file to utf-8" - не удалось прочесть файл с вводными данными из-за проблем с кодировкой;
-+"Not csv format" - файл, не обладает необходимым форматом;
-+"Incorrect number of arguments entered. ... arguments were introduced, when 3 is needed..."  - программа запущена с неверным количеством аргументов;
-+"The path ... was entered incorrectly. ... was not found" - путь введен некорректно, либо файл не найден, либо директория с файлами;
-+"... is an invalid hash function. Use md5,sha1,sha256" - в исходном файле указан алгоритм, который не реализован в программе;
-+"Input file structure is incorrect" - в файле указано отличное от примера количество колонок.
++ "Change file to utf-8" - не удалось прочесть файл с вводными данными из-за проблем с кодировкой;
++ "Not csv format" - файл, не обладает необходимым форматом;
++ "Incorrect number of arguments entered. ... arguments were introduced, when 3 is needed..."  - программа запущена с неверным количеством аргументов;
++ "The path ... was entered incorrectly. ... was not found" - путь введен некорректно, либо файл не найден, либо директория с файлами;
++ "... is an invalid hash function. Use md5,sha1,sha256" - в исходном файле указан алгоритм, который не реализован в программе;
++ "Input file structure is incorrect" - в файле указано отличное от примера количество колонок.
 
