@@ -17,10 +17,10 @@ def read_file(input_file_path):
             header=None)
         return file_reader
     except UnicodeDecodeError:
-        print("Change file to utf-8")
+        print('Change file to utf-8')
         sys.exit()
     except pd.errors.ParserError:
-        print("Not csv format")
+        print('Not csv format')
         sys.exit()
 
 
@@ -31,13 +31,13 @@ get the file hash and send it to the function for comparison.
 
 
 def encode_file(files_directory_path, filename, hash_type, hash):
-    with open(os.path.join(files_directory_path, filename), "rb") as f:
+    with open(os.path.join(files_directory_path, filename), 'rb') as f:
         bytes = f.read()
-        if hash_type == "md5":
+        if hash_type == 'md5':
             check_hash(hashlib.md5(bytes).hexdigest(), filename, hash)
-        elif hash_type == "sha256":
+        elif hash_type == 'sha256':
             check_hash(hashlib.sha256(bytes).hexdigest(), filename, hash)
-        elif hash_type == "sha1":
+        elif hash_type == 'sha1':
             check_hash(hashlib.sha1(bytes).hexdigest(), filename, hash)
         else:
             raise UsedWrongHashError(hash_type)
@@ -69,7 +69,7 @@ def general(input_file_path, files_directory_path):
     if os.path.isfile(input_file_path):
         file_reader = read_file(input_file_path)
         if file_reader is None or file_reader.shape[1] != 3:
-            raise TypeError("Input file structure is incorrect")
+            raise TypeError('Input file structure is incorrect')
         else:
             if os.path.isdir(files_directory_path):
                 for index, file_info in file_reader.iterrows():
